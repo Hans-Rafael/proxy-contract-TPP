@@ -11,10 +11,11 @@ contract BasicContractV1 is Initializable {
         bool completed;
     }
     Task[] public tasks;
-    string public category;
+    string[] public categories; // Array de categorias o tareas
+    
     // Funcion inicializadora para categoria inicial de tareas
-    function initialize(string memory _category) public initializer {
-        category = _category;
+    function initialize(string[] memory _categories) public initializer {
+        categories = _categories; // inicializo array con valores pasados
     }
     //Funcion para marcar tarea completada
     function completeTask(uint256 _taskId) public {
