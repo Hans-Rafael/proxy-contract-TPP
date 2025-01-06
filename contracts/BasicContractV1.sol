@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 // author: Hans Garcia.
-// Description: This is a basic Task manager contract.
+// Description: Gestión de una Lista de Tareas (To-Do List).
 pragma solidity 0.8.26;
 // Para TTP important ser initializable
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
-contract BasicContractV1 {
+contract BasicContractV1 is Initializable {
     struct Task {
         string description;
         bool completed;
@@ -17,9 +17,9 @@ contract BasicContractV1 {
         category = _category;
     }
     //Funcion para marcar tarea completada
-    function completeTask(uint256 taskId) public {
+    function completeTask(uint256 _taskId) public {
         require(_taskId < tasks.length, "Tarea no existe");
-        tasks[taskId].completed = true;
+        tasks[_taskId].completed = true;
     }
     //Funcion para obtener todas las tareas
     function getTasks() public view returns (Task[] memory) {
