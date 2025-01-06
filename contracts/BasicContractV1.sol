@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-// author: @hansgarcia
+// author: Hans Garcia
 pragma solidity 0.8.26;
 
 contract BasicContractV1 {
