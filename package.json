@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "deploy": "npx hardhat run scripts/deploy.ts — network loalhost",
+    "deploy": "npx hardhat run scripts/deploy.ts --network localhost",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
