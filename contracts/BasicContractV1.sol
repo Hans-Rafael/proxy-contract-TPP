@@ -30,6 +30,9 @@ contract BasicContractV1 is Initializable {
     function getTaskCount() public view returns (uint256) {
         return tasks.length;
     }
-
-    //Function para crear una nueva tarea en futuro V2
+    // Función 5 para obtener todas las categorías
+    function getCategories() public view returns (string[] memory) {
+        return categories;  // Devuelve el array de categorías
+    }
+    //Function 6 para agregar una nueva tarea en futuro V2
 }
