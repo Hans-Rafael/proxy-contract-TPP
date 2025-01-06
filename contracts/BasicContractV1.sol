@@ -1,30 +1,34 @@
 // SPDX-License-Identifier: MIT
 // author: Hans Garcia.
+// Description: This is a basic Task manager contract.
 pragma solidity 0.8.26;
+// Para TTP important ser initializable
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 contract BasicContractV1 {
-    // Declaramos una estructura para almacenar el nombre
-    struct NameRecord {
-        string name;
+    struct Task {
+        string description;
+        bool completed;
+    }
+    Task[] public tasks;
+    string public category;
+    // Funcion inicializadora para categoria inicial de tareas
+    function initialize(string memory _category) public initializer {
+        category = _category;
+    }
+    //Funcion para marcar tarea completada
+    function completeTask(uint256 taskId) public {
+        require(_taskId < tasks.length, "Tarea no existe");
+        tasks[taskId].completed = true;
+    }
+    //Funcion para obtener todas las tareas
+    function getTasks() public view returns (Task[] memory) {
+        return tasks;
+    }
+    // funcion para obtener numero de tareas
+    function getTaskCount() public view returns (uint256) {
+        return tasks.length;
     }
 
-    // Declaramos un arreglo de registros de nombres public para pruebas
-    NameRecord[] public nameRecords; 
-    
-    // Función para agregar un nuevo nombre junto con un ID único e incremental
-    function addName(string memory _name) public {
-        // Creamos un nuevo registro de nombre
-        NameRecord memory newRecord = NameRecord({
-            name: _name
-        });
-
-        // Añadimos el nuevo registro al arreglo
-        nameRecords.push(newRecord);
-
-    }
-
-    // Función para obtener la cantidad de registros de nombres
-    function getNameRecordsCount() public view returns (uint) {
-        return nameRecords.length;
-    }
+    //Function para crear una nueva tarea en futuro V2
 }
