@@ -124,3 +124,28 @@ Para garantizar compatibilidad con el Patrón de Proxy Transparente:
 
 Con estas prácticas, tus contratos estarán preparados para ser utilizados y actualizados de manera segura con el Patrón de Proxy Transparente.
 
+## Resumen práctico:
+### Si trabajas con ERC20:
+```bash
+contract MyERC20Upgradeable is Initializable, ERC20Upgradeable {
+    function initialize(string memory name, string memory symbol) public initializer {
+        __ERC20_init(name, symbol);
+    }
+}
+
+
+```
+### Si trabajas con ERC721:
+```bash
+contract MyERC721Upgradeable is Initializable, ERC721Upgradeable {
+    function initialize(string memory name, string memory symbol) public initializer {
+        __ERC721_init(name, symbol);
+    }
+}
+
+
+```
+### Ventajas de este enfoque:
+Soporte completo para proxies.
+Capacidad para actualizar contratos a versiones futuras sin pérdida de estado.
+Seguridad mejorada gracias a herramientas como initializer.
