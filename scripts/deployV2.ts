@@ -1,8 +1,14 @@
 //author: Hans Garcia
 import { ethers, upgrades } from "hardhat";
-const proxyAddress = "0x84eA74d481Ee0A5332c457a4d796187F6Ba67fEB";
+import * as dotenv from "dotenv";
+dotenv.config();
+const proxyAddress = process.env.PROXY_ADDRESS;
 async function main() {
-    console.log("Original prxy addres", proxyAddress);
+    // Verificar si la dirección del proxy está definida
+    if (!proxyAddress) {
+        throw new Error("Proxy address is not defined in .env file.");
+    }
+    console.log("Original proxy addres", proxyAddress);
     // Desplegar BasicContractV2
     const BasicContractV2 = await ethers.getContractFactory("BasicContractV2");
     console.log("Desplegando BasicContractV2...");
