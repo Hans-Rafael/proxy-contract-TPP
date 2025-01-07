@@ -15,11 +15,13 @@ describe("Proxy Contract Tests with Console Logs", function () {
     // Verificar dirección de implementación inicial
     const implementationV1 = await upgrades.erc1967.getImplementationAddress(proxyAddress);
     console.log("Logic Contract V1 Address:", implementationV1);
-
+    // Agregar una nueva tarea en V1
+    console.log("Agregando nueva tarea en V1...");
+    await proxy.addTask("Nueva Tarea");
     // Confirmar que las categorías iniciales están presentes
     const categories = await proxy.getCategories();
-    console.log("Categorías iniciales:", categories);
-    expect(categories).to.deep.equal(["Leer", "Escribir", "Borrar"]);
+    console.log("Categorías iniciales + new task:", categories);
+    expect(categories).to.deep.equal(["Leer", "Escribir", "Borrar","Nueva Tarea"]);
 
     // Actualizar a BasicContractV2
     const BasicContractV2 = await ethers.getContractFactory("BasicContractV2");
@@ -38,15 +40,15 @@ describe("Proxy Contract Tests with Console Logs", function () {
     // Confirmar que el estado (categorías) se conserva después de la actualización
     const categoriesAfterUpgrade = await upgradedProxy.getCategories();
     console.log("Categorías después de la actualización:", categoriesAfterUpgrade);
-    expect(categoriesAfterUpgrade).to.deep.equal(["Leer", "Escribir", "Borrar"]);
+    expect(categoriesAfterUpgrade).to.deep.equal(["Leer", "Escribir", "Borrar","Nueva Tarea"]);
 
     // Confirmar que las nuevas funciones de V2 están disponibles
     console.log("Agregando nuevas tareas en V2...");
-    await upgradedProxy.addTask("Nueva Tarea");
+    await upgradedProxy.addTask("Nueva Tarea2");
     const tasksAfterUpgrade = await upgradedProxy.getTasks();
     console.log("Tareas después de la actualización:", tasksAfterUpgrade);
-    expect(tasksAfterUpgrade.length).to.equal(1);
-    expect(tasksAfterUpgrade[0].description).to.equal("Nueva Tarea");
+    expect(tasksAfterUpgrade.length).to.equal(2);
+    expect(tasksAfterUpgrade[1].description).to.equal("Nueva Tarea2");
     expect(tasksAfterUpgrade[0].completed).to.be.false;
   });
 });
