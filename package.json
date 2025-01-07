@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "deploy": "npx hardhat run scripts/deployV2.ts --network localhost",
+    "deployV1": "npx hardhat run scripts/deployV1.ts --network localhost",
+    "deployV2": "npx hardhat run scripts/deployV2.ts --network localhost",
+    "deploy": "npm run deployV1 && npm run deployV2",
     "test": "npx hardhat test test/BasicContract.test.ts"
   },
   "keywords": [],
