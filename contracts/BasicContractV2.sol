@@ -6,12 +6,10 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "./BasicContractV1.sol";
 // Heredar de BasicContractV1
 contract BasicContractV2 is BasicContractV1 {
-    // Nueva funcion para agregar tareas en V2
-    function addTask(string memory _description) public {
-        Task memory newTask = Task({
-            description: _description,
-            completed: false
-        });
-        tasks.push(newTask);
+    // Función para actualizar la descripción de una tarea
+    function updateTaskDescription(uint256 _taskId, string memory _newDescription) public {
+        require(_taskId < tasks.length, "Tarea no existe");
+        tasks[_taskId].description = _newDescription;
     }
+    
 }
