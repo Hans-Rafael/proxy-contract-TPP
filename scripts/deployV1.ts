@@ -1,5 +1,6 @@
 //author: Hans Garcia
 import { ethers, upgrades } from "hardhat";
+import updateEnvFile from "../utils/updateEnvFile"; // Ruta del script automático
 
 async function main() {
   // Desplegar BasicContractV1
@@ -12,6 +13,8 @@ async function main() {
   // Obtener dirección del proxy
   const proxyAddress = await proxy.getAddress();
   console.log("Dirección del proxy:", proxyAddress);
+  // Actualiza el archivo .env con la dirección del proxy
+  updateEnvFile("PROXY_ADDRESS", proxyAddress);
   // Obtener la dirección de la implementación
   console.log(`Dirección de la implementación: ${await upgrades.erc1967.getImplementationAddress(proxyAddress)}`);
   //// Obtener la dirección del administrador del proxy
