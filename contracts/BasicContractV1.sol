@@ -11,28 +11,34 @@ contract BasicContractV1 is Initializable {
         bool completed;
     }
     Task[] public tasks;
-    string[] public categories; // Array de categorias o tareas
+    string[] public categories; // Array de categorias de tareas
     
     // Funcion inicializadora para categoria inicial de tareas
     function initialize(string[] memory _categories) public initializer {
         categories = _categories; // inicializo array con valores pasados
     }
-    //Funcion para marcar tarea completada
+
+    // Función para agregar una nueva tarea
+    function addTask(string memory _taskDescription) public {
+        tasks.push(Task({ description: _taskDescription, completed: false }));
+        categories.push(_taskDescription); // Agregar la tarea como una categoría
+    }
+
+    // Función para marcar tarea como completada
     function completeTask(uint256 _taskId) public {
         require(_taskId < tasks.length, "Tarea no existe");
         tasks[_taskId].completed = true;
     }
-    //Funcion para obtener todas las tareas
+
+    // Función para obtener tareas
     function getTasks() public view returns (Task[] memory) {
         return tasks;
     }
-    // funcion para obtener numero de tareas
-    function getTaskCount() public view returns (uint256) {
-        return tasks.length;
-    }
-    // Función 5 para obtener todas las categorías
+
+    // Función para obtener categorías
     function getCategories() public view returns (string[] memory) {
-        return categories;  // Devuelve el array de categorías
+        return categories;
     }
-    //Function 6 para agregar una nueva tarea en futuro V2
+    
+    //Function actualizar la descripción de una tarea futuro V2
 }
